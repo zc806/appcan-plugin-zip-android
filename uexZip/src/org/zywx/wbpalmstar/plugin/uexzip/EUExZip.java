@@ -163,6 +163,12 @@ public class EUExZip extends EUExBase {
 		}
 		try {
 			InputStream fileInputStream = null;
+			String suffix = newInSrcPath.substring(newInSrcPath.lastIndexOf('.') + 1);
+			if(!"zip".equalsIgnoreCase(suffix) && !"rar".equalsIgnoreCase(suffix)) {
+				jsCallback(F_CALLBACK_NAME_UNZIP, 0, EUExCallback.F_C_INT,
+						EUExCallback.F_C_FAILED);
+				return;
+			}
 			if (newInSrcPath.startsWith("/")) {
 				File file = new File(newInSrcPath);
 				fileInputStream = new FileInputStream(file);
